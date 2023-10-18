@@ -95,53 +95,32 @@ function createRandomRangeGeneratorNoRepetitions (min, max) {
   };
 }
 
-const generatePhotoId = createRandomRangeGeneratorNoRepetitions(1, 25);
-const generateLikes = createRandomRangeGeneratorNoRepetitions(15, 200);
 const generateCommentId = createRandomRangeGeneratorNoRepetitions(1, 1000);
 
-const makeMessage = function () {
-  const calculateStringCount = getRandomInteger (1,2);
+const createMessage = (count) => {
   let message = '';
-  for (let i = 1; i <= calculateStringCount; i++) {
+  for (let i = 1; i <= count; i++) {
     message += messages[getRandomInteger(0, messages.length-1)] + ' ';
   }
 
   return message;
 };
 
-const makeCommentBase = function () {
-  const messagesCount = getRandomInteger (1, 30);
-  let comments = [];
-  for (let i = 1; i <= messagesCount; i++) {
-    comments.push(makeComment());
-  }
-return comments;
-};
+const createComment = () => ({
+  id: generateCommentId(),
+  avatar: 'img/avatar-' + getRandomInteger (1, 6) + '.svg',
+  message: createMessage(getRandomInteger (1,2)),
+  name: userNames[getRandomInteger (0, userNames.length - 1)]
+});
 
-const makeComment = function () {
-  const comment = {id:generateCommentId()};
-  comment.avatar = 'img/avatar-' + getRandomInteger (1, 6) + '.svg';
-  comment.message = makeMessage ();
-  comment.name = userNames[getRandomInteger (0, userNames.length - 1)];
+const dataComments = Array.from({length:getRandomInteger (1, 30)}, () => createComment());
 
-  return comment;
-};
+const createPhoto = (id) => ({
+  id,
+  url: 'photos/' + id + '.jpg',
+  description: descriptions[getRandomInteger(0, descriptions.length-1)],
+  likes: getRandomInteger(15, 200),
+  comments: dataComments
+});
 
-const generateDataPhoto = function () {
-  const dataPhoto = {id: generatePhotoId()};
-  dataPhoto.url = 'photos/' + dataPhoto.id + '.jpg';
-  dataPhoto.description = descriptions[getRandomInteger(0, descriptions.length-1)];
-  dataPhoto.likes = generateLikes();
-  dataPhoto.comments = makeCommentBase();
-  return dataPhoto;
-};
-
-const DataPhotos = function () {
-  let datas = [];
-  for (let i = 0; i < 25; i++) {
-    datas.push(generateDataPhoto());
-  }
-return datas;
-};
-
-
+const dataPhotos = Array.from({length : 25},(_,index) => createPhoto(index + 1));
