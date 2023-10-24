@@ -1,18 +1,41 @@
-let getStringLength = (string, maxLength) => string.length <= maxLength;
+const getStringLength = (string, maxLength) => string.length <= maxLength;
 
-let checkPolydrome = (string) => {
-  let stringNormalize = string.replaceAll(' ', '').toLowerCase();
+const checkPolydrome = (string) => {
+  const stringNormalize = string.replaceAll(' ', '').toLowerCase();
   let stringReverse = '';
   for (let i = stringNormalize.length - 1; i > -1; i--) {
-    stringReverse += stringNormalize.at(i)};
+    stringReverse += stringNormalize.at(i);
+  }
   return stringNormalize === stringReverse;
 };
 
-let getNumbersString = (string) => {
+const getNumbersString = (string) => {
   let number = '';
   string += '';
-  for (let i = 0; i <= string.length - 1; i++) {
-    if (Number.isNaN(parseInt(string.at(i))) === false) {number += string.at(i).toString()}
+  Array.from(string.trim(), (element) => {
+    if(Number.isNaN(parseInt(element, 10)) === false) {
+      number += element;
+    }
+  });
+  if(Number(number) === 0) {
+    return Number.NaN;
+  } else {
+    return Number(number);
   }
-  if (Number(number)=== 0) {return Number.NaN} else {return Number(number)};
 };
+
+const getMinute = (time) => {
+  const minutes = time.split(':');
+  const minute = Number(minutes[0]) * 60 + Number(minutes[1]);
+
+  return minute;
+};
+
+const checkMeetingTime = (timeStart, timeFinish, timeMeeting, meetingLength) => {
+  if (getMinute(timeStart) <= getMinute(timeMeeting) && getMinute(timeFinish) >= getMinute(timeMeeting) + meetingLength) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
