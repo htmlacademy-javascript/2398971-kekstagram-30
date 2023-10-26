@@ -31,11 +31,10 @@ const getMinute = (time) => {
   return minute;
 };
 
-const checkMeetingTime = (timeStart, timeFinish, timeMeeting, meetingLength) => {
-  if (getMinute(timeStart) <= getMinute(timeMeeting) && getMinute(timeFinish) >= getMinute(timeMeeting) + meetingLength) {
-    return true;
-  } else {
-    return false;
-  }
-};
+const checkMeetingTime = (timeStart, timeFinish, timeMeeting, meetingLength) => (
+  getMinute(timeStart) <= getMinute(timeMeeting) && getMinute(timeFinish) >= getMinute(timeMeeting) + meetingLength);
 
+console.log(getStringLength('проверяемая строка', 20)); // true
+console.log(checkPolydrome('топот')); // true
+console.log(getNumbersString('2023 год')); // 2023
+console.log(checkMeetingTime('08:00', '17:30', '14:00', 90)); // true
