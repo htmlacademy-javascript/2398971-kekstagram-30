@@ -39,3 +39,12 @@ const checkMeetingTime = (timeStart, timeFinish, timeMeeting, meetingLength) => 
   }
 };
 
+// eslint-disable-next-line no-console
+console.log(getStringLength('проверяемая строка', 20)); // true
+// eslint-disable-next-line no-console
+console.log(checkPolydrome('топот')); // true
+// eslint-disable-next-line no-console
+console.log(getNumbersString('2023 год')); // 2023
+// eslint-disable-next-line no-console
+console.log(checkMeetingTime('08:00', '17:30', '14:00', 90)); // true
+
