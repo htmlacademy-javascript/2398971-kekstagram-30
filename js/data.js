@@ -1,8 +1,8 @@
 import {createRandomRangeGeneratorNoRepetitions} from './util.js';
 import {getRandomInteger} from './util.js';
 
-const descriptions = ['Беспутничать', 'Дежа', 'Задорина', 'Испортиться', 'Обоюдный', 'Отпороть', 'Поверье', 'Прошляпить', 'Трасса', 'Хлюпать'];
-const messages = [
+const DESCRIPTIONS = ['Беспутничать', 'Дежа', 'Задорина', 'Испортиться', 'Обоюдный', 'Отпороть', 'Поверье', 'Прошляпить', 'Трасса', 'Хлюпать'];
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -11,7 +11,7 @@ const messages = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const userNames = [
+const USER_NAMES = [
   'Губка Боб Квадратные штаны',
   'Гэри Уилсон-младший',
   'Патрик Стар',
@@ -78,8 +78,7 @@ const generateCommentId = createRandomRangeGeneratorNoRepetitions(1, 1000);
 const createMessage = (count) => {
   let message = '';
   for (let i = 1; i <= count; i++) {
-    // eslint-disable-next-line prefer-template
-    message += messages[getRandomInteger(0, messages.length - 1)] + ' ';
+    message += `${MESSAGES[getRandomInteger(0, MESSAGES.length - 1)]} `;
   }
 
   return message;
@@ -87,24 +86,21 @@ const createMessage = (count) => {
 
 const createComment = () => ({
   id: generateCommentId(),
-  // eslint-disable-next-line prefer-template
-  avatar: 'img/avatar-' + getRandomInteger (1, 6) + '.svg',
+  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
   message: createMessage(getRandomInteger (1,2)),
-  name: userNames[getRandomInteger (0, userNames.length - 1)]
+  name: USER_NAMES[getRandomInteger (0, USER_NAMES.length - 1)]
 });
 
 const dataComments = Array.from({length:getRandomInteger (1, 30)}, () => createComment());
 
 const createPhoto = (id) => ({
   id,
-  // eslint-disable-next-line prefer-template
-  url: 'photos/' + id + '.jpg',
-  description: descriptions[getRandomInteger(0, descriptions.length - 1)],
+  url: `photos/${id}.jpg`,
+  description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
   likes: getRandomInteger(15, 200),
   comments: dataComments
 });
 
-// eslint-disable-next-line no-unused-vars
 const dataPhotos = Array.from({length : 25},(_,index) => createPhoto(index + 1));
 
 export {dataPhotos};

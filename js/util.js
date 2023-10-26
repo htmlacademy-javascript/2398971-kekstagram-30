@@ -12,8 +12,8 @@ function createRandomRangeGeneratorNoRepetitions (min, max) {
   return function () {
     let currentValue = getRandomInteger(min, max);
     if (previousValues.length >= (max - min + 1)) {
-      // eslint-disable-next-line no-console, prefer-template
-      console.error('Перебраны все числа из диапазона от ' + min + ' до ' + max);
+      // eslint-disable-next-line no-console
+      console.error(`Перебраны все числа из диапазона от ${ min } до ${ max }`);
       return null;
     }
     while (previousValues.includes(currentValue)) {
