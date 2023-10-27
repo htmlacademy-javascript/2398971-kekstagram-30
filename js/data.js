@@ -91,16 +91,15 @@ const createComment = () => ({
   name: USER_NAMES[getRandomInteger (0, USER_NAMES.length - 1)]
 });
 
-const dataComments = Array.from({length:getRandomInteger (1, 30)}, () => createComment());
-
 const createPhoto = (id) => ({
   id,
   url: `photos/${id}.jpg`,
   description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
   likes: getRandomInteger(15, 200),
-  comments: dataComments
-});
+  comments: Array.from({length:getRandomInteger (1, 30)}, () => createComment())
+}
+);
 
-const dataPhotos = Array.from({length : 25},(_,index) => createPhoto(index + 1));
+const createDataPhotos = Array.from({length : 25},(_,index) => createPhoto(index + 1));
 
-export {dataPhotos};
+export {createDataPhotos};
