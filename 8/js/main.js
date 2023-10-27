@@ -1,4 +1,4 @@
-import './img-miniatures.js';
+import {createDataPhotos} from './data.js';
 import {createMiniatures} from './img-miniatures.js';
 
-createMiniatures();
+createMiniatures(createDataPhotos);
