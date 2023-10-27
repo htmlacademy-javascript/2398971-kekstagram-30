@@ -1,15 +1,12 @@
-import {createDataPhotos} from './data.js';
-
 const pictureList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const dataPhotos = createDataPhotos;
 const pictureListFragment = document.createDocumentFragment();
 
-const createMiniatures = () => {
-  dataPhotos.forEach(({url, description, likes, comments }) => {
+const createMiniatures = (photos) => {
+  photos.forEach(({url, description, likes, comments }) => {
     const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__img').alt = description;
