@@ -1,6 +1,14 @@
 import {createRandomRangeGeneratorNoRepetitions} from './util.js';
 import {getRandomInteger} from './util.js';
 
+const ID_COUNT = 25;
+const LIKES_MIN_COUNT = 15;
+const LIKES_MAX_COUNT = 200;
+const COMMENTS_COUNT = 30;
+const ID_COMMENTS_COUNT = 1000;
+const AVATAR_COMMENTS_COUNT = 6;
+const STRING_COMMENTS_COUNT_MAX = 2;
+
 const DESCRIPTIONS = ['Беспутничать', 'Дежа', 'Задорина', 'Испортиться', 'Обоюдный', 'Отпороть', 'Поверье', 'Прошляпить', 'Трасса', 'Хлюпать'];
 const MESSAGES = [
   'Всё отлично!',
@@ -73,7 +81,7 @@ const USER_NAMES = [
   'Джим'
 ];
 
-const generateCommentId = createRandomRangeGeneratorNoRepetitions(1, 1000);
+const generateCommentId = createRandomRangeGeneratorNoRepetitions(1, ID_COMMENTS_COUNT);
 
 const createMessage = (count) => {
   let message = '';
@@ -86,8 +94,8 @@ const createMessage = (count) => {
 
 const createComment = () => ({
   id: generateCommentId(),
-  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-  message: createMessage(getRandomInteger (1,2)),
+  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COMMENTS_COUNT)}.svg`,
+  message: createMessage(getRandomInteger (1,STRING_COMMENTS_COUNT_MAX)),
   name: USER_NAMES[getRandomInteger (0, USER_NAMES.length - 1)]
 });
 
@@ -95,11 +103,11 @@ const createPhoto = (id) => ({
   id,
   url: `photos/${id}.jpg`,
   description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
-  likes: getRandomInteger(15, 200),
-  comments: Array.from({length:getRandomInteger (1, 30)}, () => createComment())
+  likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
+  comments: Array.from({length:getRandomInteger (1, COMMENTS_COUNT)}, () => createComment())
 }
 );
 
-const createDataPhotos = Array.from({length : 25},(_,index) => createPhoto(index + 1));
+const createDataPhotos = Array.from({length : ID_COUNT},(_,index) => createPhoto(index + 1));
 
 export {createDataPhotos};
