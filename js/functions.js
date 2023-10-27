@@ -31,13 +31,8 @@ const getMinute = (time) => {
   return minute;
 };
 
-const checkMeetingTime = (timeStart, timeFinish, timeMeeting, meetingLength) => {
-  if (getMinute(timeStart) <= getMinute(timeMeeting) && getMinute(timeFinish) >= getMinute(timeMeeting) + meetingLength) {
-    return true;
-  } else {
-    return false;
-  }
-};
+const checkMeetingTime = (timeStart, timeFinish, timeMeeting, meetingLength) => (
+  getMinute(timeStart) <= getMinute(timeMeeting) && getMinute(timeFinish) >= getMinute(timeMeeting) + meetingLength);
 
 // eslint-disable-next-line no-console
 console.log(getStringLength('проверяемая строка', 20)); // true

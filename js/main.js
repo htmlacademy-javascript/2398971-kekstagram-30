@@ -1,4 +1,4 @@
-import {dataPhotos} from './data.js';
+import {createDataPhotos} from './data.js';
+import {createMiniatures} from './img-miniatures.js';
 
-// eslint-disable-next-line no-console
-console.log (dataPhotos);
+createMiniatures(createDataPhotos);
