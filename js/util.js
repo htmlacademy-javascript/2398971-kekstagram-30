@@ -24,5 +24,10 @@ function createRandomRangeGeneratorNoRepetitions (min, max) {
   };
 }
 
-export {createRandomRangeGeneratorNoRepetitions};
-export {getRandomInteger};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {
+  createRandomRangeGeneratorNoRepetitions,
+  getRandomInteger,
+  isEscapeKey
+};

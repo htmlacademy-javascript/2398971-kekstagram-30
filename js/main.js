@@ -1,4 +1,8 @@
 import {createDataPhotos} from './data.js';
 import {createMiniatures} from './img-miniatures.js';
+import {reviewBigImg} from './img-review.js';
 
-createMiniatures(createDataPhotos);
+const DATA_PHOTOS = createDataPhotos;
+
+createMiniatures(DATA_PHOTOS);
+reviewBigImg(DATA_PHOTOS);
