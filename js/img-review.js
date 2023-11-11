@@ -4,7 +4,7 @@ import {showComments, commentList} from './img-comments.js';
 const userPhoto = document.querySelector('.big-picture');
 const closeUserPhoto = userPhoto.querySelector('.big-picture__cancel');
 
-const commentsBotton = userPhoto.querySelector('.social__comments-loader');
+const commentsButton = userPhoto.querySelector('.social__comments-loader');
 const COMMENT_STEP_ADD = 5;
 let visibleCommentCount = COMMENT_STEP_ADD;
 
@@ -29,7 +29,7 @@ function showUserBigPhoto () {
   document.addEventListener('keydown', onDocumentKeydown);
 } // Открыть форму
 
-function getImgData(dataPhoto) {
+function insertPhotogData(dataPhoto) {
   const bigPhotoElement = userPhoto.querySelector('.big-picture__img');
   const bigPhotoElementUrl = bigPhotoElement.querySelector('img');
   const bigPhotoElementLikes = userPhoto.querySelector('.likes-count'); // Найти лайки в разметке
@@ -45,9 +45,10 @@ function getImgData(dataPhoto) {
 
 const getVisibleComment = () => {
   const allCommentsCount = commentList.children.length;
+  const startComment = visibleCommentCount - COMMENT_STEP_ADD;
   visibleCommentCount = Math.min(visibleCommentCount, allCommentsCount);
 
-  for (let i = 0; i < visibleCommentCount; i++) {
+  for (let i = Math.min(startComment, allCommentsCount); i < visibleCommentCount; i++) {
     commentList.children[i].classList.remove('hidden');
   }
   userPhoto.querySelector('.social__comment-shown-count').textContent = visibleCommentCount;
@@ -60,22 +61,15 @@ const getVisibleComment = () => {
   visibleCommentCount += COMMENT_STEP_ADD;
 };
 
-commentsBotton.addEventListener('click', () => {
+commentsButton.addEventListener('click', () => {
   getVisibleComment(commentList);
 });
 
-
 export const openBigPhoto = (photo) => {
   showUserBigPhoto();
-  getImgData(photo);
+  insertPhotogData(photo);
   getVisibleComment();
 };
 
-const initBigPhoto = () => {
-  closeUserPhoto.addEventListener('click', () => {
-    hideUserBigPhoto();
-  });
-};
-
-export {initBigPhoto};
-
+const onBigPhotoCloseButton = () => hideUserBigPhoto();
+closeUserPhoto.addEventListener('click', onBigPhotoCloseButton);
