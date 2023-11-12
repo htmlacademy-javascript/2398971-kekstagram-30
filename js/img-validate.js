@@ -3,7 +3,7 @@ const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const ERROR_TEXT = {
   INVALID_COUNT: `Не более ${MAX_HASHTAG_COUNT} хештегов` ,
   TEXT_NOT_UNIQUE: 'Хештеги не должны повторяться',
-  INVALID_PATTERN:'Хештег написан неправильно'
+  INVALID_PATTERN:'Хештег должен начинаться с # и не может быть больше 20 символов'
 };
 
 const uploadForm = document.querySelector('.img-upload__form');
@@ -13,7 +13,7 @@ const descriptionInput = uploadForm.querySelector('.text__description');
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'img-upload__error-text',
+  errorTextClass: 'img-upload__field-wrapper--error',
 });
 
 const isInputFocused = () => document.activeElement === hashtagInput || document.activeElement === descriptionInput;
@@ -64,6 +64,6 @@ pristine.addValidator(
   true
 );
 
-uploadForm.addEventListener('submit', onFormSubmit); // Валидация обработчик
+const initValidator = () => uploadForm.addEventListener('submit', onFormSubmit);
 
-export {pristine, isInputFocused};
+export {pristine, isInputFocused, initValidator};
