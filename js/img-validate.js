@@ -1,3 +1,6 @@
+import {sendData} from './api.js';
+import {showSuccessModal, showErrorModal} from './img-send.js';
+
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const ERROR_TEXT = {
@@ -5,16 +8,31 @@ const ERROR_TEXT = {
   TEXT_NOT_UNIQUE: 'Хештеги не должны повторяться',
   INVALID_PATTERN:'Хештег должен начинаться с # и не может быть больше 20 символов'
 };
+const SUBMIT_BUTTON_TEXT = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Идет публикация…'
+};
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = uploadForm.querySelector('.text__hashtags');
 const descriptionInput = uploadForm.querySelector('.text__description');
+const submitButton = uploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
 });
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SUBMIT_BUTTON_TEXT.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SUBMIT_BUTTON_TEXT.IDLE;
+};
 
 const isInputFocused = () => document.activeElement === hashtagInput || document.activeElement === descriptionInput;
 
@@ -28,18 +46,22 @@ const hasUniqueHashtags = (value) => {
 
 const hasValidHashtagsCount = (value) => normalizeHashtags(value).length <= MAX_HASHTAG_COUNT;
 
-function onFormSubmit (evt) {
-  evt.preventDefault();
+const onFormSubmit = (onSuccess) => {
+  uploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-  const isValid = pristine.validate();
-  if (isValid) {
-    // eslint-disable-next-line no-console
-    console.log('Можно отправлять');
-  } else {
-    // eslint-disable-next-line no-console
-    console.log('Форма невалидна');
-  }
-}
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .then(showSuccessModal)
+        .catch(() => showErrorModal())
+        .finally(unblockSubmitButton);
+    }
+  });
+};
+
 pristine.addValidator(
   hashtagInput,
   hasValidHashtagsSample,
@@ -64,6 +86,6 @@ pristine.addValidator(
   true
 );
 
-const initValidator = () => uploadForm.addEventListener('submit', onFormSubmit);
+//const initValidator = () => uploadForm.addEventListener('submit', onFormSubmit);
 
-export {pristine, isInputFocused, initValidator};
+export {pristine, isInputFocused, onFormSubmit};
