@@ -17,7 +17,7 @@ const levelValue = uploadForm.querySelector('.effect-level__value');
 let currentEffect = EFFECTS.none;
 
 const isDefault = () => currentEffect === EFFECTS.none;
-const isVisible = () => {
+const changeEffectVisibility = () => {
   if (currentEffect.visible) {
     uploadEffectLevel.classList.remove('hidden');
   } else {
@@ -75,7 +75,7 @@ const getScrollSliderData = () => {
 const onEffectChange = (evt) => {
   currentEffect = EFFECTS[evt.target.value];
   updateSlider(currentEffect.min, currentEffect.max , currentEffect.step);
-  isVisible();
+  changeEffectVisibility();
   setPhotoStyle();
 };
 
@@ -85,7 +85,7 @@ const deleteEffect = () => {
 };
 
 const initSlider = () => {
-  isVisible();
+  changeEffectVisibility();
   uploadEffects.addEventListener('change', onEffectChange);
   getScrollSliderData();
 };
