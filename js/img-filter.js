@@ -22,19 +22,28 @@ const FILTER_SWITCH = {
     [...dataPhotos].sort((element1, element2) => element2.comments.length - element1.comments.length)
 };
 
-const setFilter = (evt, dataPhotos) => {
-  Array.from({length : imgFiltersForm.length}, (_,index) => imgFiltersForm[index].classList.remove('img-filters__button--active'));
-  evt.target.classList.add('img-filters__button--active');
 
+const pasteFilteredPhoto = (evt, dataPhotos) => {
   const filtereredData = FILTER_SWITCH[evt.target.id] (dataPhotos);
   const pictures = document.querySelectorAll('.picture');
+
   pictures.forEach((element) => element.remove());
   createMiniatures(filtereredData);
 };
 
+const debouncedPasteFilteredPhoto = debounce(pasteFilteredPhoto, 500);
+
+const setFilter = (evt, dataPhotos) => {
+  Array.from({length : imgFiltersForm.length}, (_,index) => imgFiltersForm[index].classList.remove('img-filters__button--active'));
+  evt.target.classList.add('img-filters__button--active');
+
+  debouncedPasteFilteredPhoto(evt, dataPhotos);
+};
+
+
 const initImgFilters = (dataPhotos) => {
   imgFilters.classList.remove('img-filters--inactive');
-  Array.from({length : imgFiltersForm.length}, (_,index) => imgFiltersForm[index].addEventListener('click', debounce((evt) => setFilter (evt, dataPhotos))));
+  Array.from({length : imgFiltersForm.length}, (_,index) => imgFiltersForm[index].addEventListener('click',(evt) => setFilter (evt, dataPhotos)));
 };
 
 export {initImgFilters};
