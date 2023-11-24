@@ -46,7 +46,7 @@ const hasUniqueHashtags = (value) => {
 
 const hasValidHashtagsCount = (value) => normalizeHashtags(value).length <= MAX_HASHTAG_COUNT;
 
-const onFormSubmit = (onSuccess) => {
+const addOnFormSubmit = (onSuccess) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -86,6 +86,4 @@ pristine.addValidator(
   true
 );
 
-//const initValidator = () => uploadForm.addEventListener('submit', onFormSubmit);
-
-export {pristine, isInputFocused, onFormSubmit};
+export {pristine, isInputFocused, addOnFormSubmit};
