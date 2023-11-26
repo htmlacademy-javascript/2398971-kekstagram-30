@@ -24,14 +24,14 @@ const FilterSwitch = {
 
 
 const pasteFilteredPhoto = (evt, dataPhotos) => {
-  const filtereredData = FilterSwitch[evt.target.id] (dataPhotos);
+  const filteredData = FilterSwitch[evt.target.id] (dataPhotos);
   const pictures = document.querySelectorAll('.picture');
 
   pictures.forEach((element) => element.remove());
-  createMiniatures(filtereredData);
+  createMiniatures(filteredData);
 };
 
-const debouncedPasteFilteredPhoto = debounce(pasteFilteredPhoto, 500);
+const debouncedPasteFilteredPhoto = debounce(pasteFilteredPhoto);
 
 const setFilter = (evt, dataPhotos) => {
   Array.from({length : imgFiltersForm.length}, (_,index) => imgFiltersForm[index].classList.remove('img-filters__button--active'));
