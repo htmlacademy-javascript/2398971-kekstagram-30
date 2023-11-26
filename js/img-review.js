@@ -67,5 +67,9 @@ export const openBigPhoto = (photo) => {
   getVisibleComment();
 };
 
+commentsButton.addEventListener('click', () => {
+  getVisibleComment(commentList);
+});
+
 const onBigPhotoCloseButton = () => hideUserBigPhoto();
 closeUserPhoto.addEventListener('click', onBigPhotoCloseButton);
