@@ -49,10 +49,6 @@ function onDocumentKeydown(evt) {
 const onPhotoLoadChange = () => showUploadForm();
 const onFormCloseButton = () => hideUploadForm();
 
-uploadForm.addEventListener('change', onPhotoLoadChange); // Открыть форму обработчик
-closeOverlay.addEventListener('click', onFormCloseButton); // Закрыть форму обработчик
-setSlider();
-
 function pasteLoadPhoto () {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
@@ -65,5 +61,9 @@ function pasteLoadPhoto () {
     });
   }
 }
+
+uploadForm.addEventListener('change', onPhotoLoadChange);
+closeOverlay.addEventListener('click', onFormCloseButton);
+setSlider();
 
 export {hideUploadForm, showUploadForm, removeUploadKeydownEvent, addUploadKeydownEvent};

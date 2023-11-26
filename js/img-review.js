@@ -29,7 +29,7 @@ function showUserBigPhoto () {
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
-function insertPhotogData(dataPhoto) {
+function insertPhotoData(dataPhoto) {
   const bigPhotoElement = userPhoto.querySelector('.big-picture__img');
   const bigPhotoElementUrl = bigPhotoElement.querySelector('img');
   const bigPhotoElementLikes = userPhoto.querySelector('.likes-count');
@@ -38,7 +38,7 @@ function insertPhotogData(dataPhoto) {
 
   bigPhotoElementUrl.src = dataPhoto.url;
   bigPhotoElementLikes.textContent = dataPhoto.likes;
-  bigPhotoElementCommentCountTotal.textContent = dataPhoto.comments.length;
+  bigPhotoElementCommentCountTotal.textContent = `${dataPhoto.comments.length}`;
   showComments(dataPhoto);
   bigPhotoElementCommentDescription.textContent = dataPhoto.description;
 }
@@ -61,13 +61,9 @@ const getVisibleComment = () => {
   visibleCommentCount += COMMENT_STEP_ADD;
 };
 
-commentsButton.addEventListener('click', () => {
-  getVisibleComment(commentList);
-});
-
 export const openBigPhoto = (photo) => {
   showUserBigPhoto();
-  insertPhotogData(photo);
+  insertPhotoData(photo);
   getVisibleComment();
 };
 
