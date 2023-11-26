@@ -8,7 +8,7 @@ const EFFECTS = {
 };
 
 const uploadForm = document.querySelector('.img-upload__form');
-const uploadPreview = uploadForm.querySelector('.img-upload__preview');
+const uploadPreview = uploadForm.querySelector('.img-upload__preview img');
 const uploadEffects = uploadForm.querySelector('.img-upload__effects');
 const uploadEffectLevel = uploadForm.querySelector('.img-upload__effect-level');
 const levelSlider = uploadForm.querySelector('.effect-level__slider');
