@@ -10,7 +10,7 @@ const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
 const closeOverlay = uploadForm.querySelector('.img-upload__cancel');
 const fileChooser = document.querySelector('.img-upload__input');
 const uploadPreview = document.querySelector('.img-upload__preview img');
-
+const effectsPreview = document.querySelectorAll('.effects__preview');
 
 const removeUploadKeydownEvent = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -60,8 +60,10 @@ function pasteLoadPhoto () {
 
   if (matches) {
     uploadPreview.src = URL.createObjectURL(file);
+    effectsPreview.forEach((element) => {
+      element.style.backgroundImage = `url(${uploadPreview.src})`;
+    });
   }
 }
-
 
 export {hideUploadForm, showUploadForm, removeUploadKeydownEvent, addUploadKeydownEvent};
