@@ -21,26 +21,26 @@ function hideUserBigPhoto () {
   document.removeEventListener('keydown', onDocumentKeydown);
   visibleCommentCount = COMMENT_STEP_ADD;
   userPhoto.querySelector('.comments-loader').classList.remove('hidden');
-} // Закрыть форму
+}
 
 function showUserBigPhoto () {
   userPhoto.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-} // Открыть форму
+}
 
 function insertPhotogData(dataPhoto) {
   const bigPhotoElement = userPhoto.querySelector('.big-picture__img');
   const bigPhotoElementUrl = bigPhotoElement.querySelector('img');
-  const bigPhotoElementLikes = userPhoto.querySelector('.likes-count'); // Найти лайки в разметке
-  const bigPhotoElementCommentCountTotal = userPhoto.querySelector('.social__comment-total-count'); // Общее количество комментариев в разметке
-  const bigPhotoElementCommentDescription = userPhoto.querySelector('.social__caption'); // Найти описание фото в разметке
+  const bigPhotoElementLikes = userPhoto.querySelector('.likes-count');
+  const bigPhotoElementCommentCountTotal = userPhoto.querySelector('.social__comment-total-count');
+  const bigPhotoElementCommentDescription = userPhoto.querySelector('.social__caption');
 
-  bigPhotoElementUrl.src = dataPhoto.url; // Ссылка на фото
-  bigPhotoElementLikes.textContent = dataPhoto.likes; //  Количество лайков
-  bigPhotoElementCommentCountTotal.textContent = dataPhoto.comments.length; // Общее количество комментариев
-  showComments(dataPhoto); // залить комментарии
-  bigPhotoElementCommentDescription.textContent = dataPhoto.description; // описание фото
+  bigPhotoElementUrl.src = dataPhoto.url;
+  bigPhotoElementLikes.textContent = dataPhoto.likes;
+  bigPhotoElementCommentCountTotal.textContent = dataPhoto.comments.length;
+  showComments(dataPhoto);
+  bigPhotoElementCommentDescription.textContent = dataPhoto.description;
 }
 
 const getVisibleComment = () => {

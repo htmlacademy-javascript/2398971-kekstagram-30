@@ -5,7 +5,7 @@ const RANDOM_COMMENTS_COUNT = 10;
 const imgFilters = document.querySelector('.img-filters');
 const imgFiltersForm = document.querySelector('.img-filters__form');
 
-const FILTER_SWITCH = {
+const FilterSwitch = {
   'filter-default': (dataPhotos) => dataPhotos,
   'filter-random': (dataPhotos) => {
     const getRandomPhotoId = createRandomRangeGeneratorNoRepetitions(0, dataPhotos.length - 1);
@@ -24,7 +24,7 @@ const FILTER_SWITCH = {
 
 
 const pasteFilteredPhoto = (evt, dataPhotos) => {
-  const filtereredData = FILTER_SWITCH[evt.target.id] (dataPhotos);
+  const filtereredData = FilterSwitch[evt.target.id] (dataPhotos);
   const pictures = document.querySelectorAll('.picture');
 
   pictures.forEach((element) => element.remove());

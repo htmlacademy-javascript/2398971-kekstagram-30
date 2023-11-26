@@ -1,4 +1,3 @@
-//import {createDataPhotos} from './data.js';
 import {createMiniatures} from './img-miniatures.js';
 import './img-review.js';
 import {hideUploadForm} from './img-upload.js';

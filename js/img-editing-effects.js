@@ -1,4 +1,4 @@
-const EFFECTS = {
+const Effects = {
   chrome: {style: 'grayscale', unit: '' , min: 0 , max: 1, step: 0.1, visible: true},
   sepia: {style: 'sepia', unit: '' , min: 0, max: 1, step: 0.1, visible: true},
   marvin: {style: 'invert', unit: '%' , min: 0, max: 100, step: 1, visible: true},
@@ -14,9 +14,9 @@ const uploadEffectLevel = uploadForm.querySelector('.img-upload__effect-level');
 const levelSlider = uploadForm.querySelector('.effect-level__slider');
 const levelValue = uploadForm.querySelector('.effect-level__value');
 
-let currentEffect = EFFECTS.none;
+let currentEffect = Effects.none;
 
-const isDefault = () => currentEffect === EFFECTS.none;
+const isDefault = () => currentEffect === Effects.none;
 const changeEffectVisibility = () => {
   if (currentEffect.visible) {
     uploadEffectLevel.classList.remove('hidden');
@@ -73,14 +73,14 @@ const getScrollSliderData = () => {
 };
 
 const onEffectChange = (evt) => {
-  currentEffect = EFFECTS[evt.target.value];
+  currentEffect = Effects[evt.target.value];
   updateSlider(currentEffect.min, currentEffect.max , currentEffect.step);
   changeEffectVisibility();
   setPhotoStyle();
 };
 
 const deleteEffect = () => {
-  currentEffect = EFFECTS.none;
+  currentEffect = Effects.none;
   updateSlider(currentEffect.min, currentEffect.max , currentEffect.step);
 };
 

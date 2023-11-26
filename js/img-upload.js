@@ -29,7 +29,7 @@ const hideUploadForm = () => {
   removeUploadKeydownEvent();
   deleteEffect();
   resetScale();
-}; // Закрыть форму
+};
 
 const showUploadForm = () => {
   uploadOverlay.classList.remove('hidden');
@@ -37,7 +37,7 @@ const showUploadForm = () => {
   addUploadKeydownEvent();
   pasteLoadPhoto();
   initSlider();
-}; // Открыть форму
+};
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !isInputFocused()) {
