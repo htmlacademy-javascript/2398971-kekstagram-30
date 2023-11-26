@@ -3,12 +3,12 @@ import {showSuccessModal, showErrorModal} from './img-send.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
-const ERROR_TEXT = {
+const ErrorText = {
   INVALID_COUNT: `Не более ${MAX_HASHTAG_COUNT} хештегов` ,
   TEXT_NOT_UNIQUE: 'Хештеги не должны повторяться',
   INVALID_PATTERN:'Хештег должен начинаться с # и не может быть больше 20 символов'
 };
-const SUBMIT_BUTTON_TEXT = {
+const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Идет публикация…'
 };
@@ -26,12 +26,12 @@ const pristine = new Pristine(uploadForm, {
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
-  submitButton.textContent = SUBMIT_BUTTON_TEXT.SENDING;
+  submitButton.textContent = SubmitButtonText.SENDING;
 };
 
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
-  submitButton.textContent = SUBMIT_BUTTON_TEXT.IDLE;
+  submitButton.textContent = SubmitButtonText.IDLE;
 };
 
 const isInputFocused = () => document.activeElement === hashtagInput || document.activeElement === descriptionInput;
@@ -65,7 +65,7 @@ const addOnFormSubmit = (onSuccess) => {
 pristine.addValidator(
   hashtagInput,
   hasValidHashtagsSample,
-  ERROR_TEXT.INVALID_PATTERN,
+  ErrorText.INVALID_PATTERN,
   3,
   true
 );
@@ -73,7 +73,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagInput,
   hasUniqueHashtags,
-  ERROR_TEXT.TEXT_NOT_UNIQUE,
+  ErrorText.TEXT_NOT_UNIQUE,
   2,
   true
 );
@@ -81,7 +81,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagInput,
   hasValidHashtagsCount,
-  ERROR_TEXT.INVALID_COUNT,
+  ErrorText.INVALID_COUNT,
   1,
   true
 );
