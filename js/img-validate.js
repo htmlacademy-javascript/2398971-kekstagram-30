@@ -1,6 +1,9 @@
 import {sendData} from './api.js';
 import {showSuccessModal, showErrorModal} from './img-send.js';
 
+const INVALID_COUNT_STAGE_VALIDATOR = 1;
+const TEXT_NOT_UNIQUE_STAGE_VALIDATOR = 2;
+const INVALID_PATTERN_STAGE_VALIDATOR = 3;
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const ErrorText = {
@@ -66,7 +69,7 @@ pristine.addValidator(
   hashtagInput,
   hasValidHashtagsSample,
   ErrorText.INVALID_PATTERN,
-  3,
+  INVALID_PATTERN_STAGE_VALIDATOR,
   true
 );
 
@@ -74,7 +77,7 @@ pristine.addValidator(
   hashtagInput,
   hasUniqueHashtags,
   ErrorText.TEXT_NOT_UNIQUE,
-  2,
+  TEXT_NOT_UNIQUE_STAGE_VALIDATOR,
   true
 );
 
@@ -82,7 +85,7 @@ pristine.addValidator(
   hashtagInput,
   hasValidHashtagsCount,
   ErrorText.INVALID_COUNT,
-  1,
+  INVALID_COUNT_STAGE_VALIDATOR,
   true
 );
 

@@ -3,7 +3,7 @@ import {pristine, isInputFocused} from './img-validate.js';
 import {initSlider, deleteEffect, setSlider} from './img-editing-effects.js';
 import {resetScale} from './img-editing-scale.js';
 
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+const fileTypes = ['jpg', 'jpeg', 'png'];
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
@@ -52,7 +52,7 @@ const onFormCloseButton = () => hideUploadForm();
 function pasteLoadPhoto () {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = fileTypes.some((it) => fileName.endsWith(it));
 
   if (matches) {
     uploadPreview.src = URL.createObjectURL(file);
